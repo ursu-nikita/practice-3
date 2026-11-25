@@ -45,7 +45,9 @@ class Machine:
         """Read an indirect operand and reject invalid real square roots."""
         value = self.memory[self.address(pointer)]
         if not math.isfinite(value) or value < 0:
-            raise ValueError(f"sqrt requires a finite nonnegative value: {value}")
+            raise ValueError(
+                f"sqrt requires a finite nonnegative value: {value}"
+            )
         return math.sqrt(value)
 
     def run(self):

@@ -1,0 +1,29 @@
+# Compute sqrt in place for nine elements at 512..520.
+# Pointer table uses addresses 700..708.
+mem[512] = 0
+mem[513] = 1
+mem[514] = 4
+mem[515] = 9
+mem[516] = 16
+mem[517] = 25
+mem[518] = 36
+mem[519] = 49
+mem[520] = 64
+mem[700] = 512
+mem[701] = 513
+mem[702] = 514
+mem[703] = 515
+mem[704] = 516
+mem[705] = 517
+mem[706] = 518
+mem[707] = 519
+mem[708] = 520
+mem[512] = sqrt(mem[mem[700]])
+mem[513] = sqrt(mem[mem[701]])
+mem[514] = sqrt(mem[mem[702]])
+mem[515] = sqrt(mem[mem[703]])
+mem[516] = sqrt(mem[mem[704]])
+mem[517] = sqrt(mem[mem[705]])
+mem[518] = sqrt(mem[mem[706]])
+mem[519] = sqrt(mem[mem[707]])
+mem[520] = sqrt(mem[mem[708]])

@@ -25,7 +25,8 @@ def main(argv=None):
         if args.test:
             for instruction in instructions:
                 print(instruction.fields())
-                print(", ".join(f"0x{byte:02X}" for byte in encode(instruction)))
+                encoded = encode(instruction)
+                print(", ".join(f"0x{byte:02X}" for byte in encoded))
         print(f"Instructions: {len(instructions)}")
         return 0
     except (OSError, ValueError) as error:
