@@ -1,4 +1,4 @@
-# Code occupies addresses 0..42. Data is separate within the same memory.
+# Code occupies addresses 0..31. Data is separate within the same memory.
 mem[512] = 7
 mem[513] = 11
 mem[514] = 19

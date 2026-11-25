@@ -53,3 +53,17 @@ py -3 src/interpreter.py build/copy.bin build/copy.json --start 600 --end 602
 
 В JSON сохраняются поля start, end и memory. Обе границы включены.
 Ожидаемый результат копирования — 7, 11, 19.
+
+## Арифметика
+
+`sqrt` читает указатель из mem[C], затем операнд из mem[mem[C]].
+Вычисленный вещественный корень записывается в mem[B]. Дробная часть
+сохраняется. Отрицательные и нечисловые указатели, выход за границы,
+отрицательные и бесконечные операнды приводят к диагностике с адресом PC.
+
+```powershell
+py -3 src/assembler.py examples/sqrt.asm build/sqrt.bin
+py -3 src/interpreter.py build/sqrt.bin build/sqrt.json --start 600 --end 600
+```
+
+Результат в ячейке 600 равен 3.0.

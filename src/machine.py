@@ -2,7 +2,7 @@
 import math
 
 from codec import decode_at
-from instructions import ADDRESS_LIMIT, OP_LOAD, OP_READ, OP_WRITE
+from instructions import ADDRESS_LIMIT, OP_LOAD, OP_READ, OP_SQRT, OP_WRITE
 
 
 class Machine:
@@ -27,7 +27,7 @@ class Machine:
         return int(value)
 
     def execute(self, instruction):
-        """Apply constant loading, indirect reading or direct copying."""
+        """Execute a memory operation or square root of an indirect value."""
         a, b, c = instruction.a, instruction.b, instruction.c
         if a == OP_LOAD:
             self.memory[b] = c
@@ -36,8 +36,17 @@ class Machine:
             self.memory[c] = self.memory[pointer]
         elif a == OP_WRITE:
             self.memory[b] = self.memory[c]
+        elif a == OP_SQRT:
+            self.memory[b] = self.square_root(self.memory[c])
         else:
             raise ValueError(f"Unsupported opcode: {a}")
+
+    def square_root(self, pointer):
+        """Read an indirect operand and reject invalid real square roots."""
+        value = self.memory[self.address(pointer)]
+        if not math.isfinite(value) or value < 0:
+            raise ValueError(f"sqrt requires a finite nonnegative value: {value}")
+        return math.sqrt(value)
 
     def run(self):
         """Fetch each instruction from current memory until program end."""
